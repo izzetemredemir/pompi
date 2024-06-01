@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const data = [
     {
-        address: "0x0",
+        address: "0xCD9bf60062093860f3698e9214D4D71Ba68258F3",
         logoUrl:"https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
         name:"pepe",
         ticker:"$PP",
