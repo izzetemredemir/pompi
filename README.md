@@ -2,8 +2,6 @@ PompiFi is an innovative DeFi meme token launchpad designed to provide a secure 
 
 Website: https://pompi-27jjydhzba-ew.a.run.app/
 
-Code: https://github.com/izzetemredemir/pompi
-
 ### Technologies Used:
 - **Hardhat & Solidity:** These tools are used for smart contract development and testing, providing a robust environment for building decentralized applications.
 - **NEON ERC-20 for SPL Token Standard:** This standard facilitates interoperability between Ethereum and Solana, allowing users to create tokens on Ethereum that can be used on Solana.
