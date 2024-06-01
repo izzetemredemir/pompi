@@ -1,24 +1,84 @@
 import {useState} from 'react'
+import TokenLaunchpadAbi from "../abis/TokenLaunchpad.json"
+// const ethers = require("ethers")
+import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react'
+import { BrowserProvider, Contract, Interface } from 'ethers'
 
 const Create = () => {
     const [formData, setFormData] = useState({
-        name: '',
-        ticker: '',
-        description: '',
-        image: '',
-        telegramLink: '',
-      });
-    
-      const handleChange = (e) => {
+            name: '',
+            ticker: '',
+            description: '',
+            image: '',
+            telegramLink: '',
+        });
+
+    const { address, chainId, isConnected } = useWeb3ModalAccount()
+    const { walletProvider } = useWeb3ModalProvider()
+
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
           ...formData,
           [name]: value,
         });
-      };
+    };
     
-      const handleSubmit = (e) => {
+
+    async function createToken(name, symbol) {
+        try {
+            // Connect to provider
+            const provider = new BrowserProvider(walletProvider);
+            await provider.send("eth_requestAccounts", []);
+        
+            // Get signer
+            const signer = await provider.getSigner();
+            console.log("Using account:", address);
+        
+            // Contract instance
+            const tokenLaunchpadAddress = "0x9c670237cfdE371eb6b2C250637d0a13A8b7a281";
+            const TokenLaunchpad = new Contract(
+                tokenLaunchpadAddress,
+                TokenLaunchpadAbi.abi,
+                signer
+            );
+            // Create token
+            const tx = await TokenLaunchpad.createToken(name, symbol);
+            const receipt = await tx.wait();
+        
+            console.log("Transaction receipt:", receipt);
+        
+            // Parse event
+            const eventAbi = [
+                "event TokenCreated(address indexed tokenAddress, string name, string symbol)",
+            ];
+            const iface = new Interface(eventAbi);
+        
+            let newTokenAddress;
+            for (let log of receipt.logs) {
+                try {
+                const parsedLog = iface.parseLog(log);
+                if (parsedLog.name === "TokenCreated") {
+                    newTokenAddress = parsedLog.args.tokenAddress;
+                    console.log("Token Address:", parsedLog.args.tokenAddress);
+                    console.log("Name:", parsedLog.args.name);
+                    console.log("Symbol:", parsedLog.args.symbol);
+                    break;
+                }
+                } catch (e) {
+                // log not parsed
+                }
+            }
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+        }
+      }
+      
+
+      const handleSubmit = async (e) => {
         e.preventDefault();
+
+        await createToken(formData.name, formData.ticker)
         // Handle form submission here
         console.log(formData);
       };

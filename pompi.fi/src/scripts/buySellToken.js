@@ -1,7 +1,7 @@
 const hre = require("hardhat");
 const { ethers } = require("hardhat");
 
-async function main() {
+async function swapToken() {
   const [deployer] = await ethers.getSigners();
   console.log("Using account:", deployer.address);
 
@@ -40,9 +40,4 @@ async function main() {
   console.log(`Token price after selling: ${ethers.formatEther(price2)} ETH`);
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+module.exports = swapToken;

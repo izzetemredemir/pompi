@@ -65,12 +65,12 @@ const Exchange = () => {
                 id="token2"
                 type="number"
                 value={token2Amount}
-                className="w-4/6 py-1 px-2 border rounded focus:outline-none focus:border-blue-400 text-foreground"
+                className="w-4/6 py-1 px-2 border rounded focus:outline-none  text-foreground"
                 disabled
             />
         </div>
         <div className="flex justify-center mt-4">
-            <button className="bg-pink hover:bg-blue-600 text-foreground font-semibold py-2 px-4 rounded focus:outline-none">
+            <button className="bg-purple-900 hover:bg-pink mt-2 font-bold py-2 px-4 w-full">
             Swap
             </button>
         </div>

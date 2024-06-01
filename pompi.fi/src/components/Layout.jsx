@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 
 const Layout = () => {
     const { open } = useWeb3Modal()
-    const { address, chainId, isConnected } = useWeb3ModalAccount()
+    const { address } = useWeb3ModalAccount()
 
     return (
         <>
