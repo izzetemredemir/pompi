@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import TokenLaunchpadAbi from "../abis/TokenLaunchpad.json"
-import { Contract, formatEther, parseEther, BrowserProvider, parseUnits } from 'ethers';
+import { Contract, formatEther, parseEther, BrowserProvider, parseUnits, toBigInt } from 'ethers';
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
 
 const tokenPair = [
@@ -93,16 +93,16 @@ const Exchange = () => {
 
             // Show token price
             let price = await TokenLaunchpad.getTokenPrice(tokenAddress);
-            setTokenPrice(parseUnits(price, "wei"));
-            console.log("oruce" ,price)
+            console.log("price" ,parseEther(String(price)))
+            setTokenPrice(parseEther(String(price)));
             // Buy tokens
-            const buyValue = parseEther(String(price * 1n));
-            const buyTx = await TokenLaunchpad.buyToken(tokenAddress, 1n, { value: buyValue });
+            const buyValue = parseEther(String(price * toBigInt(1)));
+            const buyTx = await TokenLaunchpad.buyToken(tokenAddress, toBigInt(1), { value: buyValue });
             await buyTx.wait();
 
             // Show token price after buying
             let priceAfterBuying = await TokenLaunchpad.getTokenPrice(tokenAddress);
-            setTokenPrice(formatEther(priceAfterBuying));
+            setTokenPrice(parseUnits(priceAfterBuying, "wei"));
         } catch (error) {
         console.error('Error swapping tokens:', error);
         }
@@ -137,7 +137,7 @@ const Exchange = () => {
 
     return (
     <div className="max-w-md mx-auto mt-8 p-4 rounded-md">
-        {/* {tokenPrice} */}
+        {tokenPrice}
         <div className="flex justify-between items-center">
             <div className="flex items-center">
                 <img src={swapToggle?tokenPair[0].logoUrl : tokenPair[1].logoUrl} alt="Token 1" className="h-6 w-6 mr-2" />
@@ -178,7 +178,7 @@ const Exchange = () => {
             />
         </div>
         <div className="flex justify-center mt-4">
-            <button className="bg-purple-900 hover:bg-pink mt-2 font-bold py-2 px-4 w-full" onClick={() => buyToken()}>
+            <button className="bg-purple-900 hover:bg-pink mt-2 font-bold py-2 px-4 w-full" onClick={() => swap()}>
             Swap
             </button>
         </div>
