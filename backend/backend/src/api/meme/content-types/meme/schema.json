@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "memes",
+  "info": {
+    "singularName": "meme",
+    "pluralName": "memes",
+    "displayName": "meme"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "ticker": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
+    },
+    "telegram": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
