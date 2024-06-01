@@ -1,37 +1,6 @@
 import Token from "../components/Token";
 import { useEffect, useState } from "react";
 
-// const data = [
-//     {
-//         address: "0xCD9bf60062093860f3698e9214D4D71Ba68258F3",
-//         logoUrl:"https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
-//         name:"pepe",
-//         ticker:"$PP",
-//         description:"a fun fren wit no utility",
-//     },
-//     {
-//         address: "0x1",
-//         logoUrl:"https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
-//         name:"pepe2",
-//         ticker:"$PP",
-//         description:"a fun fren wit no utility",
-//     },
-//     {
-//         address: "0x2",
-//         logoUrl:"https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
-//         name:"pepe3",
-//         ticker:"$PP",
-//         description:"a fun fren wit no utility",
-//     },
-//     {
-//         address: "0x3",
-//         logoUrl:"https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
-//         name:"pepe",
-//         ticker:"$PP",
-//         description:"a fun fren wit no utility",
-//     },
-// ]
-
 const Home = () => {
   const [search, setSearch] = useState("");
   const [tokens, setTokens] = useState([]);
@@ -39,17 +8,23 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://steadfast-prosperity-e813c26e87.strapiapp.com/api/memes"
+        "https://steadfast-prosperity-e813c26e87.strapiapp.com/api/memes?populate=*"
       );
       const result = await response.json();
-      const data = result.data.map((item) => ({
-        address: item.attributes.address,
-        logoUrl:
-          "https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
-        name: item.attributes.name,
-        ticker: item.attributes.ticker,
-        description: item.attributes.desc || "No description available",
-      }));
+      const data = result.data.map((item) => {
+        const defaultLogoUrl =
+          "https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776";
+        const imageUrl = item.attributes.image?.data?.attributes?.url
+          ? item.attributes.image.data.attributes.url
+          : defaultLogoUrl;
+        return {
+          address: item.attributes.address,
+          logoUrl: imageUrl,
+          name: item.attributes.name,
+          ticker: item.attributes.ticker,
+          description: item.attributes.desc || "No description available",
+        };
+      });
       setTokens(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -59,7 +34,9 @@ const Home = () => {
   const handleSearch = () => {
     setTokens((prevTokens) =>
       prevTokens.filter(
-        (token) => token.address.includes(search) || token.name.includes(search)
+        (token) =>
+          token.address?.toLowerCase().includes(search.toLowerCase()) ||
+          token.name.toLowerCase().includes(search.toLowerCase())
       )
     );
   };
@@ -93,7 +70,7 @@ const Home = () => {
               ticker={token.ticker}
               description={token.description}
               address={token.address}
-              key={token.address}
+              key={token.address || token.name}
             />
           );
         })}
