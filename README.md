@@ -2,9 +2,8 @@ PompiFi is an innovative DeFi meme token launchpad designed to provide a secure 
 
 Website: https://pompi-27jjydhzba-ew.a.run.app/
 
-![Ekran Resmi 2024-06-02 00 35 02](https://github.com/izzetemredemir/pompi/assets/11755605/81105981-c591-4a46-b63a-244ace88de6c)
+![Ekran Resmi 2024-06-02 11 01 12](https://github.com/izzetemredemir/pompi/assets/11755605/e74506d2-94fd-45fc-8729-af583e43acf4)
 ![Ekran Resmi 2024-06-01 23 44 37](https://github.com/izzetemredemir/pompi/assets/11755605/23814bbf-e493-4ed6-a174-96e6bc9676ed)
-
 
 
 ### Technologies Used:
