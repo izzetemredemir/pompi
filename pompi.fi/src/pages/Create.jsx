@@ -38,7 +38,7 @@ const Create = () => {
     imageData.append("files", image);
 
     const response = await fetch(
-      "https://steadfast-prosperity-e813c26e87.strapiapp.com/api/upload",
+      "https://api.pompi.xyz/api/upload",
       {
         method: "POST",
         body: imageData,
@@ -98,7 +98,7 @@ const Create = () => {
       if (newTokenAddress) {
         const imageId = await uploadImage(formData.image);
         const response = await fetch(
-          "https://steadfast-prosperity-e813c26e87.strapiapp.com/api/memes",
+          "https://api.pompi.xyz/api/memes",
           {
             method: "POST",
             headers: {

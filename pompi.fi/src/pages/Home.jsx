@@ -8,7 +8,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://steadfast-prosperity-e813c26e87.strapiapp.com/api/memes?populate=*"
+        "https://api.pompi.xyz/api/memes?populate=*"
       );
       const result = await response.json();
       const data = result.data.map((item) => {

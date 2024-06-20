@@ -17,7 +17,7 @@ const Layout = () => {
                 <Link to="/">home</Link>
             </li>
             <li className="font-bold text-2xl">
-                pompi.fi
+                pompi.xyz
             </li>
             <li className="menu-item">
                 <Link to="/create">create</Link>
