@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import { useWeb3Modal, useWeb3ModalAccount } from '@web3modal/ethers/react'
+import React from "react";
 import { ethers } from "ethers";
 
 const Layout = () => {

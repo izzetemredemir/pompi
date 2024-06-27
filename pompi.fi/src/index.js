@@ -14,11 +14,11 @@ const projectId = "pompi.fi";
 
 // 2. Set chains
 const mainnet = {
-  chainId: 245022926,
-  name: "Neon EVM DevNet",
-  currency: "NEON",
-  explorerUrl: "https://devnet.neonscan.org",
-  rpcUrl: "https://devnet.neonevm.org",
+  chainId: 11155111,
+  name: "Sepolia Testnet",
+  currency: "SepoliaETH",
+  explorerUrl: "https://sepolia.etherscan.io/",
+  rpcUrl: `https://eth-sepolia.g.alchemy.com/v2/xANWTQeBRNw4PeeB59zfpVZHP2xNTq8z`,
 };
 
 // 3. Create a metadata object
@@ -44,9 +44,6 @@ const ethersConfig = defaultConfig({
 
 // 5. Create a Web3Modal instance
 createWeb3Modal({
-  featuredWalletIds: [
-    "225affb176778569276e484e1b92637ad061b01e13a048b35a9d280c3b58970f",
-  ],
   ethersConfig,
   chains: [mainnet],
   projectId,

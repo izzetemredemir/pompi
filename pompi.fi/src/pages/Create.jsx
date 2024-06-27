@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import TokenLaunchpadAbi from "../abis/TokenLaunchpad.json";
 import {
   useWeb3ModalProvider,
@@ -55,7 +56,7 @@ const Create = () => {
       await provider.send("eth_requestAccounts", []);
       const signer = await provider.getSigner();
       const tokenLaunchpadAddress =
-        "0x9c670237cfdE371eb6b2C250637d0a13A8b7a281";
+        "0x039DDcb7776be78A006F30e79949da53F8691538";
       const TokenLaunchpad = new Contract(
         tokenLaunchpadAddress,
         TokenLaunchpadAbi.abi,

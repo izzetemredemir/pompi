@@ -1,6 +1,6 @@
 import Token from "../components/Token";
 import { useEffect, useState } from "react";
-
+import React from "react";
 const Home = () => {
   const [search, setSearch] = useState("");
   const [tokens, setTokens] = useState([]);
@@ -61,7 +61,7 @@ const Home = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 gap-1 mt-1">
         {tokens.map((token) => {
           return (
             <Token
