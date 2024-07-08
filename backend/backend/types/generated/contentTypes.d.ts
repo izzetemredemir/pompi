@@ -362,31 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiMemeMeme extends Schema.CollectionType {
-  collectionName: 'memes';
-  info: {
-    singularName: 'meme';
-    pluralName: 'memes';
-    displayName: 'meme';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Attribute.String;
-    ticker: Attribute.String;
-    desc: Attribute.String;
-    telegram: Attribute.String;
-    image: Attribute.Media<'images'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::meme.meme', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::meme.meme', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -720,7 +695,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -748,6 +722,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    socialScore: Attribute.Integer & Attribute.DefaultTo<0>;
+    user_profile: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::user-profile.user-profile'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -813,6 +793,220 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCommentComment extends Schema.CollectionType {
+  collectionName: 'comments';
+  info: {
+    singularName: 'comment';
+    pluralName: 'comments';
+    displayName: 'TokenComment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    commentImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    comment: Attribute.String & Attribute.Required;
+    meme: Attribute.Relation<
+      'api::comment.comment',
+      'manyToOne',
+      'api::meme.meme'
+    >;
+    user_profile: Attribute.Relation<
+      'api::comment.comment',
+      'manyToOne',
+      'api::user-profile.user-profile'
+    >;
+    commentTime: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comment.comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comment.comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMemeMeme extends Schema.CollectionType {
+  collectionName: 'memes';
+  info: {
+    singularName: 'meme';
+    pluralName: 'memes';
+    displayName: 'meme';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String;
+    ticker: Attribute.String;
+    desc: Attribute.String;
+    telegram: Attribute.String;
+    image: Attribute.Media<'images'>;
+    comments: Attribute.Relation<
+      'api::meme.meme',
+      'oneToMany',
+      'api::comment.comment'
+    >;
+    user_profile: Attribute.Relation<
+      'api::meme.meme',
+      'manyToOne',
+      'api::user-profile.user-profile'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::meme.meme', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::meme.meme', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'Post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Attribute.String;
+    postTime: Attribute.DateTime;
+    postImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    memeLaunchTime: Attribute.DateTime;
+    user_profile: Attribute.Relation<
+      'api::post.post',
+      'manyToOne',
+      'api::user-profile.user-profile'
+    >;
+    meme: Attribute.Relation<'api::post.post', 'oneToOne', 'api::meme.meme'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostCommentPostComment extends Schema.CollectionType {
+  collectionName: 'post_comments';
+  info: {
+    singularName: 'post-comment';
+    pluralName: 'post-comments';
+    displayName: 'PostComment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    comment: Attribute.String & Attribute.Required;
+    commentImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    user_profile: Attribute.Relation<
+      'api::post-comment.post-comment',
+      'manyToOne',
+      'api::user-profile.user-profile'
+    >;
+    commentTime: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::post-comment.post-comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::post-comment.post-comment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUserProfileUserProfile extends Schema.CollectionType {
+  collectionName: 'user_profiles';
+  info: {
+    singularName: 'user-profile';
+    pluralName: 'user-profiles';
+    displayName: 'UserProfile';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    username: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    memesCreated: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToMany',
+      'api::meme.meme'
+    >;
+    memesTraded: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToMany',
+      'api::meme.meme'
+    >;
+    token_comments: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToMany',
+      'api::comment.comment'
+    >;
+    address: Attribute.String;
+    post_comments: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToMany',
+      'api::post-comment.post-comment'
+    >;
+    profilePicture: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    posts: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToMany',
+      'api::post.post'
+    >;
+    user: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -823,7 +1017,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::meme.meme': ApiMemeMeme;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -832,6 +1025,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::comment.comment': ApiCommentComment;
+      'api::meme.meme': ApiMemeMeme;
+      'api::post.post': ApiPostPost;
+      'api::post-comment.post-comment': ApiPostCommentPostComment;
+      'api::user-profile.user-profile': ApiUserProfileUserProfile;
     }
   }
 }
