@@ -26,3 +26,14 @@ code {
   max-width: 50%;
   margin: auto;
 }
+
+.post {
+  border: 1px #bd93f932 solid;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #2D2C3D;
+}
+
+hr {
+  border-top: 1px solid #BD93F9;
+}

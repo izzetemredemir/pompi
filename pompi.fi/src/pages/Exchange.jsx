@@ -347,12 +347,12 @@ const Exchange = () => {
         </div>
         <div className="col-span-1 bg-[#613980]/[.09] rounded-xl p-5 row-span-1 border border-[#bd93f932] h-min">
           <p className="font-bold text-xl">about $PP</p>
-          <hr style={{borderTop: '1px solid #BD93F9'}}/>
+          <hr/>
           <p>this token rox the meme token world. and there is our lovely frog pepe and has no utility except having a big mouth.</p>
         </div>
         <div className="col-span-1 bg-[#613980]/[.09] rounded-xl p-5 row-span-1 border border-[#bd93f932] h-min">
         <p className="font-bold text-xl">holders distribution</p>
-          <hr style={{borderTop: '1px solid #BD93F9'}}/>
+          <hr/>
           <ol className="list-decimal	list-inside">
             <li>0xB4B1d7e9(%4)</li>
             <li>0x3D1f0E94(%3)</li>
@@ -367,7 +367,7 @@ const Exchange = () => {
           <p className={comOrTrade==='comment' ? "font-bold text-l mb-3 cursor-pointer bg-[#9f71de] text-[#f2f2f2] p-1 px-2 rounded-lg" : "font-bold text-l mb-3 cursor-pointer text-[#f2f2f2] bg-[#bd93f958] p-1 px-2 rounded-lg"} onClick={() => setComOrTrade("comment")}>comments</p>
           <p className={comOrTrade==='trade' ? "font-bold text-l mb-3 cursor-pointer bg-[#9f71de] text-[#f2f2f2] p-1 px-2 rounded-lg" : "font-bold text-l mb-3 cursor-pointer text-[#f2f2f2] bg-[#bd93f958] p-1 px-2 rounded-lg"} onClick={() => setComOrTrade("trade")}>trades</p>
         </div>
-        <hr style={{borderTop: '1px solid #BD93F9'}}/>
+        <hr/>
         {comOrTrade === "comment" ?
           <>
             <div className="grid grid-cols-10 gap-2 my-3">
@@ -379,22 +379,22 @@ const Exchange = () => {
               </button>
             </div>
             <div className="mt-2">
-              <hr style={{borderTop: '1px solid #BD93F9'}}/>
+              <hr/>
               <p className="font-bold text-sm mt-1">0xB4B1d7e9E</p>
               <p className="mt-1">let's pump it</p>
             </div>
             <div className="mt-2">
-              <hr style={{borderTop: '1px solid #BD93F9'}}/>
+              <hr/>
               <p className="font-bold text-sm mt-1">0xFfB922215B</p>
               <p className="mt-1">devs are owsome</p>
             </div>
             <div className="mt-2">
-              <hr style={{borderTop: '1px solid #BD93F9'}}/>
+              <hr/>
               <p className="font-bold text-sm mt-1">0x3D1f0E94E3</p>
               <p className="mt-1">popmpi itt!!!</p>
             </div>
             <div className="mt-2">
-              <hr style={{borderTop: '1px solid #BD93F9'}}/>
+              <hr/>
               <p className="font-bold text-sm mt-1">0xD5F4E1Bc7E</p>
               <p className="mt-1">hodling!</p>
             </div>
@@ -403,15 +403,15 @@ const Exchange = () => {
             <div>
               <div>
                 <p className="font-bold text-sm mt-1">0xB4B1d7e9E swapped 0.023 $ETH for 125004 $PP</p>
-                <hr style={{borderTop: '1px solid #BD93F9'}}/>
+                <hr/>
                 <p className="font-bold text-sm mt-1">0xB4B1d7e9E swapped 0.023 $ETH for 125004 $PP</p>
-                <hr style={{borderTop: '1px solid #BD93F9'}}/>
+                <hr/>
                 <p className="font-bold text-sm mt-1">0xB4B1d7e9E swapped 0.023 $ETH for 125004 $PP</p>
-                <hr style={{borderTop: '1px solid #BD93F9'}}/>
+                <hr/>
                 <p className="font-bold text-sm mt-1">0xB4B1d7e9E swapped 0.023 $ETH for 125004 $PP</p>
-                <hr style={{borderTop: '1px solid #BD93F9'}}/>
+                <hr/>
                 <p className="font-bold text-sm mt-1">0xB4B1d7e9E swapped 0.023 $ETH for 125004 $PP</p>
-                <hr style={{borderTop: '1px solid #BD93F9'}}/>
+                <hr/>
               </div>
             </div>
             </>

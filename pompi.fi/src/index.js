@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import Exchange from "./pages/Exchange";
 import Create from "./pages/Create";
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
+import Porfile from "./pages/Porfile";
+import Feed from "./pages/Feed";
 
 // 1. Get projectId
 const projectId = "pompi.fi";
@@ -58,6 +60,8 @@ root.render(
         <Route index element={<Home />} />
         <Route path="exchange/:address" element={<Exchange />} />
         <Route path="create" element={<Create />} />
+        <Route path="p/:address" element={<Porfile />} />
+        <Route path="feed" element={<Feed />} />
       </Route>
     </Routes>
   </BrowserRouter>
